@@ -1,17 +1,31 @@
-package org.example;
-
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-public class Main {
-    static void main() {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        IO.println(String.format("Hello and welcome!"));
-
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            IO.println("i = " + i);
-        }
-    }
+package org.test;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.Assert;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
+import static org.testng.Assert.assertTrue;
+public class WebpageTest {
+private static WebDriver driver;
+@BeforeTest
+public void openBrowser() throws InterruptedException {
+driver = new ChromeDriver();
+driver.manage().window().maximize();
+Thread.sleep(2000);
+driver.get("https://sauravsarkar-codersarcade.github.io/CA-MVN/"); // "Note:
+You should use your GITHUB-URL here...!!!"
+}
+@Test
+public void titleValidationTest(){
+String actualTitle = driver.getTitle();
+String expectedTitle = "Tripillar Solutions";
+Assert.assertEquals(actualTitle, expectedTitle);
+assertTrue(true, "Title should contain 'Tripillar'");
+}
+@AfterTest
+public void closeBrowser() throws InterruptedException {
+Thread.sleep(1000);
+driver.quit();
+}
 }
